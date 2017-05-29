@@ -84,7 +84,10 @@ class Deck:
                 ]
 
     def deal(self, player_cards, n):
-        """Simulates dealing the deck of cards."""
+        """Simulates dealing the deck of cards.
+           'player_cards' is the list of cards that have already been dealt.
+            'n' is the number of times cards are dealt.
+        """
         i = 0
         while i < n:
             card = random.choice(self.composition).describe()
