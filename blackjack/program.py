@@ -4,19 +4,8 @@ from cards import Deck
 def main():
     """Simulates the game of Blackjack."""
     print_header()
+    game_loop()
     # deal card (give 2 cards to player after randomizing)
-    while True:
-        response = input("Are you ready to play?(y/n) ")
-        if response == 'y':
-            print("Ok, let's begin!")
-            deck = Deck()
-            player_cards = []
-            deal_player(deck, player_cards, 2)
-            print(player_cards)
-            break
-        else:
-            print("Ok, exiting...goodbye!")
-            break
     # determine sum of 2 cards dealt and assign to a variable
     # if blackjack, player wins, the hand wins
     # ask player "would you like to play another hand
@@ -45,6 +34,21 @@ def print_header():
     print()
 
 
+def game_loop():
+    """Asks player if he/she wants to hit or stand."""
+    print('Do you want to play?')
+    cmd = None
+    while cmd != 'n':
+        cmd = input("[Y]es, [N]o: ")
+        cmd = cmd.lower().strip()
+        if cmd == 'y':
+            print('y')
+        elif cmd != 'n':
+            print("Sorry, I didn't understand {}.".format(cmd))
+        else:
+            print("Ok, Goodbye!")
+
+
 def deal_player(deck_of_cards, player_cards, n):
     """
     Deals card/cards to player from deck.
@@ -63,18 +67,6 @@ def deal_player(deck_of_cards, player_cards, n):
     return player_cards
 
 
-def game_loop():
-    """Asks player if he/she wants to hit or stand."""
-
-    while True:
-        cmd = input("Do [h]it or [s]tand? ")
-        if cmd == 'h':
-            print('h')
-        elif cmd == 's':
-            print('s')
-        else:
-            print("Ok, Goodbye!")
-            break
 
 
 if __name__ == "__main__":
