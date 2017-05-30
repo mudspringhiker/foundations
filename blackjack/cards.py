@@ -2,31 +2,23 @@ import random
 
 
 class Card:
-    """Represents the cards in a deck."""
+    """Represents an individual card."""
     def __init__(self, suite, kind, value):
-        """Initialize attributes to describe a card."""
         self.suite = suite
         self.kind = kind
         self.value = value
 
-    def describe(self):
+    def __repr__(self):
         """Returns the description of the card."""
-        description = [self.suite, self.kind, self.value]
-        return description
+        return "{} of {}".format(self.kind, self.suite)
 
-    # hearts_ace = Card("hearts", "ace", 1)
-    # print(type(hearts_ace.describe()))
+# hearts_ace = Card("hearts", "king", 10)
+# print(hearts_ace)
 
 
 class Deck:
     """Represents a deck of cards."""
     def __init__(self):
-        """Initialize attributes to describe a deck of cards."""
-        self.total = 52
-        self.suites = ['Hearts', 'Diamonds', 'Spades', 'Clubs']
-        self.kinds = [
-            'Ace', '2', '3', '4', '5', '6', '7', '8', '9', '10', 'Jack', 'Queen', 'King'
-        ]
         ace = [1, 11]
         self.composition = [
                 Card('Hearts', 'Ace', ace),
@@ -83,21 +75,26 @@ class Deck:
                 Card('Clubs', 'King', 10)
                 ]
 
-    def deal(self, player_cards, n):
-        """Simulates dealing the deck of cards.
-           'player_cards' is the list of cards that have already been dealt.
-            'n' is the number of times cards are dealt.
+    def deal(self, player: list) -> list:
         """
-        i = 0
-        while i < n:
-            card = random.choice(self.composition).describe()
-            while card in player_cards:
-                card = random.choice(self.composition).describe()
-            player_cards.append(card)
-            i += 1
-        return player_cards
+        Simulates dealing the deck of cards to 'player' (a list). 
+        :returns a list of cards dealt
+        """
+        card = random.choice(self.composition)
+        self.composition.remove(card)
+        player.append(card)
+        return player
 
 
-# deck = Deck()
-# player = []
-# print(deck.deal(player, 4))
+deck = Deck()
+print(len(deck.composition))
+player = []
+print(deck.deal(player))
+print(len(deck.composition))
+print()
+print(deck.deal(player))
+print(len(deck.composition))
+
+print()
+print(deck.deal(player))
+print(len(deck.composition))

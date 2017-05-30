@@ -2,7 +2,9 @@ from cards import Deck
 
 
 def main():
-    """Simulates the game of Blackjack."""
+    """
+    Simulates the game of blackjack.
+    """
     print_header()
     game_loop()
     # deal card (give 2 cards to player after randomizing)
@@ -28,6 +30,9 @@ def main():
 
 
 def print_header():
+    """
+    This method prints out the header for the app. 
+    """
     print("---------------------------------")
     print("          Blackjack App")
     print("---------------------------------")
@@ -42,29 +47,21 @@ def game_loop():
         cmd = input("[Y]es, [N]o: ")
         cmd = cmd.lower().strip()
         if cmd == 'y':
-            print('y')
+            play()
         elif cmd != 'n':
             print("Sorry, I didn't understand {}.".format(cmd))
         else:
             print("Ok, Goodbye!")
 
 
-def deal_player(deck_of_cards, player_cards, n):
-    """
-    Deals card/cards to player from deck.
-    'deck_of_cards' is the instantiated Deck
-    'player_cards' is the list of cards the player has (empty if none)
-    'n' is the number of times a card will be dealt the player
-    """
-    i = 0
-    while i < n:
-        card = deck_of_cards.deal()
-        while card in player_cards:
-            card = deck_of_cards.deal()
-        print("Your card is {}.".format(card))
-        player_cards.append(card)
-        i += 1
-    return player_cards
+def play():
+    """Outlines blackjack game."""
+    deck = Deck()
+    player_cards = []
+    dealer_cards = []
+    deck.deal(player_cards, )
+    deck.deal(dealer_cards, 1)
+
 
 
 
