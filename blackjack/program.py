@@ -77,9 +77,9 @@ def game_loop():
             dealer_hand_value = hand_value(dealer_hand)
             print('Dealer is at {} with the hand {}.'.format(dealer_hand_value, dealer_hand))
             print('Player is at {} with the hand {}.'.format(player_hand_value, player_hand))
-            if player_hand_value >= dealer_hand_value:
+            if (player_hand_value >= dealer_hand_value) and (player_hand_value < 21):
                 print('You won!')
-            else:
+            elif dealer_hand_value == 21:
                 print('You lost!')
 
     else:
