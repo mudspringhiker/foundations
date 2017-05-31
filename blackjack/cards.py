@@ -7,24 +7,21 @@ class Card:
     def __init__(self, suit, rank):
         self.suit = suit
         self.rank = rank
+        if rank == 'ACE':
+            self.value = 11
+        elif rank in [str(_) for _ in range(2, 11)]:
+            self.value = int(rank)
+        else:
+            self.value = 10
 
     def __repr__(self):
         """Returns the description of the card."""
         return "{} of {}".format(self.rank, self.suit)
 
-    def value(self):
-        """Returns the value of the card."""
-        if self.rank == 'ACE':
-            self.value = 11
-        elif self.rank in [str(_) for _ in range(2, 11)]:
-            self.value = int(self.rank)
-        else:
-            self.value = 10
-        return self.value
 
 # a_card = Card("hearts", "8")
 # print(a_card)
-# value = a_card.value()
+# value = a_card.value
 # print("value: {}".format(value))
 # print(type(value))
 
