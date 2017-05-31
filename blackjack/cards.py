@@ -42,25 +42,29 @@ class Deck:
         return self.composition.pop()
 
 
-deck = Deck()
-print(len(deck.composition))
-player_hand = []
-print('player hand: {}'.format(player_hand))
-print("Dealing...")
-player_hand.append(deck.deal())
-print("player_hand = {}".format(player_hand))
-print(len(deck.composition))
-print("Dealing...")
-player_hand.append(deck.deal())
-print("player_hand = {}".format(player_hand))
-print(len(deck.composition))
+# deck = Deck()
+# print(len(deck.composition))
+# player_hand = []
+# print('player hand: {}'.format(player_hand))
+# print("Dealing...")
+# player_hand.append(deck.deal())
+# print("player_hand = {}".format(player_hand))
+# print(len(deck.composition))
+# print("Dealing...")
+# player_hand.append(deck.deal())
+# print("player_hand = {}".format(player_hand))
+# print(len(deck.composition))
 
 
 def hand_value(hand):
-    """Calculates the value of cards on hand (should be a list)."""
-    return sum(card.value for card in hand)
+    """Shows player_hand and calculates the value of cards (should be a list)."""
+    total = sum(card.value for card in hand)
+    num_aces = len([card.rank for card in hand if card.rank == 'ACE'])
+    if total > 21 and num_aces > 0:
+        while num_aces > 0:
+            total -= 10
+            num_aces -= 1
+    return total
 
 
-print('The value of your cards is {}.'.format(hand_value(player_hand)))
-
-
+# print('The value of your cards is {}.'.format(hand_value(player_hand)))
