@@ -1,4 +1,5 @@
-from cards import Deck
+import time
+from cards import Deck, hand_value
 
 
 def main():
@@ -7,26 +8,6 @@ def main():
     """
     print_header()
     game_loop()
-    # deal card (give 2 cards to player after randomizing)
-    # determine sum of 2 cards dealt and assign to a variable
-    # if blackjack, player wins, the hand wins
-    # ask player "would you like to play another hand
-    # if yes - got back to step 3
-    # otherwise, quit
-    # otherwise proceed to steps below
-    # ask player if he/she wants another card
-    # if yes give card
-    # if no do nothing
-    # determine sum of cards
-    # if less than 21:
-    # ask hit or stand
-    # hit - give card
-    # go back to "determine sum of cards"
-    # stand - do nothing
-    # if = 21:
-    # player wins, dealer busts
-    # if > 21:
-    # player busts, dealer wins
 
 
 def print_header():
@@ -44,44 +25,71 @@ def game_loop():
     gameinit = input('Do you want to play?(y/n) ')
 
     if gameinit == 'y':
-        print("Initializing deck of cards...")
-        print()
+
+        # Initialize deck of cards
+        print("Shuffling deck of cards...")
         deck = Deck()
+        time.sleep(2)
+        print()
+
+        # Initialize player's and dealer's hands
         player_hand = []
         dealer_hand = []
+
+        # Deal 2 cards for player and dealer
         print("Dealing cards:")
         for i in range(2):
             print("Player...")
             player_hand.append(deck.deal())
             print("Dealer...")
             dealer_hand.append(deck.deal())
-        print('Your cards are:')
-        for card in player_hand:
-            print("\t{}".format(card))
+        print()
+        print("Dealer's card: \n\t{}".format(dealer_hand[1]))
+
+        # Show cards and determine sum of cards
+        show(player_hand)
+        print()
+        player_hand_value = hand_value(player_hand)
+        print('The value of your cards is {}.'.format(player_hand_value))
+        if player_hand_value == 21:
+            print("Blackjack, 21! You won!")
+        elif player_hand_value > 21:
+            print("Bust! You lose!")
+        else:
+
+            cmd = input("Do you [h]it or [s]tand? ")
+            print()
+
+            while cmd != 's':
+                player_hand.append(deck.deal())
+                show(player_hand)
+                player_hand_value = hand_value(player_hand)
+                print('The value of your cards is {}.'.format(player_hand_value))
+                if player_hand_value == 21:
+                    print("Blackjack, 21! You won!")
+                    break
+                elif player_hand_value > 21:
+                    print("Bust! You lose!")
+                    break
+                else:
+                    cmd = input("Do you [h]it or [s]tand? ")
+
+            dealer_hand_value = hand_value(dealer_hand)
+            print('Dealer is at {} with the hand {}.'.format(dealer_hand_value, dealer_hand))
+            print('Player is at {} with the hand {}.'.format(player_hand_value, player_hand))
+            if player_hand_value >= dealer_hand_value:
+                print('You won!')
+            else:
+                print('You lost!')
+
     else:
         print("Exiting game...")
 
 
-        # sumcards = player[0].value + player[1].value
-        # print(sumcards)
-        # if sumcards == 21:
-        #     print("You won!")
-        # else:
-        #     cmd = None
-        #     while cmd != 'n':
-        #         cmd = input("Do you [h]it or [s]tand? ")
-        #         cmd = cmd.lower().strip()
-        #         if cmd == 'h':
-        #             deck.deal(player)
-        #             print('Your cards:')
-        #             for card in player:
-        #                 print(card)
-        #
-        #         elif cmd != 's':
-        #             pass
-        #         else:
-        #             print("I didn't understand.")
-        #             continue
+def show(player_hand):
+    print('Your cards are:')
+    for card in player_hand:
+        print("\t{}".format(card))
 
 
 if __name__ == "__main__":
