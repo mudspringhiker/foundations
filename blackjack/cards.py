@@ -19,13 +19,6 @@ class Card:
         return "{} of {}".format(self.rank, self.suit)
 
 
-# a_card = Card("hearts", "8")
-# print(a_card)
-# value = a_card.value
-# print("value: {}".format(value))
-# print(type(value))
-
-
 class Deck:
     """Represents a deck of cards."""
     def __init__(self):
@@ -42,20 +35,6 @@ class Deck:
         return self.composition.pop()
 
 
-# deck = Deck()
-# print(len(deck.composition))
-# player_hand = []
-# print('player hand: {}'.format(player_hand))
-# print("Dealing...")
-# player_hand.append(deck.deal())
-# print("player_hand = {}".format(player_hand))
-# print(len(deck.composition))
-# print("Dealing...")
-# player_hand.append(deck.deal())
-# print("player_hand = {}".format(player_hand))
-# print(len(deck.composition))
-
-
 def hand_value(hand):
     """Shows player_hand and calculates the value of cards (should be a list)."""
     total = sum(card.value for card in hand)
@@ -65,6 +44,3 @@ def hand_value(hand):
             total -= 10
             num_aces -= 1
     return total
-
-
-# print('The value of your cards is {}.'.format(hand_value(player_hand)))
