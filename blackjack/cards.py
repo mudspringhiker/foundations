@@ -57,12 +57,10 @@ print(len(deck.composition))
 
 
 def hand_value(hand):
-    """Calculates the value of cards on hand."""
-    total = 0
-    for card in hand:
-        total += card.value
-    return total
+    """Calculates the value of cards on hand (should be a list)."""
+    return sum(card.value for card in hand)
 
 
-print(hand_value(player_hand))
+print('The value of your cards is {}.'.format(hand_value(player_hand)))
+
 
