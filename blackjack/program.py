@@ -40,30 +40,48 @@ def print_header():
 
 
 def game_loop():
-    """Asks player if he/she wants to hit or stand."""
-    print('Do you want to play?')
-    cmd = None
-    while cmd != 'n':
-        cmd = input("[Y]es, [N]o: ")
-        cmd = cmd.lower().strip()
-        if cmd == 'y':
-            play()
-        elif cmd != 'n':
-            print("Sorry, I didn't understand {}.".format(cmd))
-        else:
-            print("Ok, Goodbye!")
+
+    gameinit = input('Do you want to play?(y/n) ')
+
+    if gameinit == 'y':
+        print("Initializing deck of cards...")
+        print()
+        deck = Deck()
+        player_hand = []
+        dealer_hand = []
+        print("Dealing cards:")
+        for i in range(2):
+            print("Player...")
+            player_hand.append(deck.deal())
+            print("Dealer...")
+            dealer_hand.append(deck.deal())
+        print('Your cards are:')
+        for card in player_hand:
+            print("\t{}".format(card))
+    else:
+        print("Exiting game...")
 
 
-def play():
-    """Outlines blackjack game."""
-    deck = Deck()
-    player_cards = []
-    dealer_cards = []
-    deck.deal(player_cards, )
-    deck.deal(dealer_cards, 1)
-
-
-
+        # sumcards = player[0].value + player[1].value
+        # print(sumcards)
+        # if sumcards == 21:
+        #     print("You won!")
+        # else:
+        #     cmd = None
+        #     while cmd != 'n':
+        #         cmd = input("Do you [h]it or [s]tand? ")
+        #         cmd = cmd.lower().strip()
+        #         if cmd == 'h':
+        #             deck.deal(player)
+        #             print('Your cards:')
+        #             for card in player:
+        #                 print(card)
+        #
+        #         elif cmd != 's':
+        #             pass
+        #         else:
+        #             print("I didn't understand.")
+        #             continue
 
 
 if __name__ == "__main__":
