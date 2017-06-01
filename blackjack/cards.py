@@ -36,7 +36,7 @@ class Deck:
 
 
 def hand_value(hand):
-    """Shows player_hand and calculates the value of cards (should be a list)."""
+    """Calculates the value of cards (should be a list)."""
     total = sum(card.value for card in hand)
     num_aces = len([card.rank for card in hand if card.rank == 'ACE'])
     if total > 21 and num_aces > 0:
